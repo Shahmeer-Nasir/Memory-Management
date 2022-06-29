@@ -1,0 +1,81 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+    <title>Memory Management by Shah</title>
+</head>
+<body>
+    <h1>Memory Management Algorithms</h1>
+    <div class="container">
+        
+        <div class="input-container">
+
+            <div id="option-a" class="option">
+
+                <!-- Static partition -->
+                <input type="radio" id="static" name="partition-type" onclick="UpdateType(this.id)">
+                <label for="static">Static</label>
+
+                <!-- Dynamic partition -->
+                <input type="radio" id="dynamic" name="partition-type" onclick="UpdateType(this.id)">
+                <label for="dynamic">Dynamic</label>
+                
+            </div>
+            <div id="option-b" class="option">
+
+                <!-- Memory Size -->
+                <label for="memory">Memory Size</label>
+                <input type="input" id="memory" name="memory" onclick="UpdateMemory(this.id)">
+
+                <br>
+
+                <!-- Partitions -->
+                <label for="partitions">Partitions</label>
+                <input type="input" id="partitions" name="partitions" onclick="UpdatePartitions(this.id)">
+
+            </div>
+            <div id="option-c" class="option">
+
+                <!-- Partion Size -->
+                <label for="part-size">Partition Size</label>
+                <input type="input" id="part-size" name="memory" onclick="UpdateMemory(this.id)">
+                
+            </div>
+
+            <div id="option-d" class="option">
+
+                <!-- First fit -->
+                <input type="radio" id="firstfit" name="algo" onclick="FirstFit(this.id)">
+                <label for="firstfit">First Fit</label>
+
+                <!-- Next fit -->
+                <input type="radio" id="nextfit" name="algo" onclick="NextFit(this.id)">
+                <label for="nextfit">Next Fit</label>
+
+                <!-- Best fit -->
+                <input type="radio" id="bestfit" name="algo" onclick="BestFit(this.id)">
+                <label for="bestfit">Best Fit</label>
+
+                <!-- Worst fit -->
+                <input type="radio" id="worstfit" name="algo" onclick="WorstFit(this.id)">
+                <label for="worstfit">Worst Fit</label>
+                
+            </div>
+            
+
+        </div>
+        <div class="output-container">
+            <p id="output">
+                something
+            </p>
+        </div>
+    </div>
+    
+
+    <script src="app.js"></script>
+</body>
+</html>
