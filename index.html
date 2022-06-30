@@ -29,24 +29,23 @@
 
                 <!-- Memory Size -->
                 <label for="memory">Memory Size</label>
-                <input type="range" min="4" max="32" step="2" id="memory" name="memory" onchange="UpdateMemory(this.id)">
-
                 <br>
+                <label for="memory">4</label>
+                <input type="range" min="4" max="32" step="2" id="memory" name="memory" onchange="UpdateMemory(this.id)">
+                <label for="memory">32</label>
+
+                <br><br>
 
                 <!-- Partitions -->
                 <label for="partitions">Partitions</label>
+                <br>
+                <label for="partitions">1</label>
                 <input type="range" min="1" max="16" id="partitions" name="partitions" onchange="UpdatePartitions(this.id)">
+                <label id="part-max" for="partitions">16</label>
 
             </div>
+
             <div id="option-c" class="option">
-
-                <!-- Partion Size -->
-                <label for="part-size">Partition Size</label>
-                <input type="range" id="part-size" name="memory" onclick="UpdateMemory(this.id)">
-                
-            </div>
-
-            <div id="option-d" class="option">
 
                 <!-- First fit -->
                 <input type="radio" id="firstfit" name="algo" onclick="FirstFit(this.id)">
@@ -70,9 +69,9 @@
         </div>
         <div class="output-container">
 
-            <div id="ram-size">0 MB</div>
+            <div id="ram-size">0</div><div id="ram-unit">MB</div>
             <div id="ram">
-                <div class="partition"><div>8 MB</div></div>
+                <div class="partition"><div>8</div></div>
                 <div class="partition"></div>
                 <div class="partition"></div>
             </div>
