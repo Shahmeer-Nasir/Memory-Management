@@ -1,5 +1,5 @@
 
-function AddPartition(ram_size){
+function AddPartition(ram_size, part_num){
 
     size = Math.floor(Math.random() * ram_size / 2) + 2;
     // alert('ram_size: ' + ram_size + '\nsize: ' + size);
@@ -10,6 +10,7 @@ function AddPartition(ram_size){
     const node1 = document.createElement('input');
     node1.type = 'text';
     node1.value = size;
+    node1.id = 'partition-' + part_num;
     // const partition_size = document.createTextNode(size);
 
     // node1.appendChild(partition_size);
@@ -40,6 +41,7 @@ function UpdateMemory(id) {
 
     ram_size = document.getElementById(id).value;
     document.getElementById('ram-size').innerHTML = ram_size;
+    document.getElementById('ram').innerHTML = '';
 
     let max_partition = ram_size / 2;
 
@@ -55,14 +57,31 @@ function UpdatePartitions(id) {
     ram_size = document.getElementById('ram-size').innerHTML;
     max_part_size = ram_size / 2;
 
-    // alert(ram_size - 2);
     for(i = 0; i < partitions; i++) {
-        max_part_size = AddPartition(max_part_size);
+        max_part_size = AddPartition(max_part_size, i + 1);
     }
 }
 
 
-// function updatePartition(id)
+function CheckRamPartitionSize() {
+
+    partitions = document.getElementById('partitions').value;
+    ram_size = document.getElementById('ram-size').innerHTML;
+    total_partition_size = 0;
+
+    for(i = 0; i < partitions; i++){
+        size = document.getElementById('partition-' + (i + 1)).value;
+        size = Number(size);
+        total_partition_size += size;
+    }
+    if(total_partition_size != ram_size) {
+        alert('Total partition size must be equal to RAM size!');
+    }
+    else {
+
+    }
+
+}
 
     
 
