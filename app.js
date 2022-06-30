@@ -63,7 +63,7 @@ function UpdatePartitions(id) {
 }
 
 
-function CheckRamPartitionSize() {
+function CheckRamPartitionSize(id) {
 
     partitions = document.getElementById('partitions').value;
     ram_size = document.getElementById('ram-size').innerHTML;
@@ -74,11 +74,24 @@ function CheckRamPartitionSize() {
         size = Number(size);
         total_partition_size += size;
     }
+
     if(total_partition_size != ram_size) {
         alert('Total partition size must be equal to RAM size!');
     }
-    else {
 
+    else {
+        if(id == 'firstfit'){
+            alert(id);
+        }
+        else if(id == 'nextfit'){
+            alert(id);
+        }
+        else if(id == 'bestfit'){
+            alert(id);
+        }
+        else if(id == 'worstfit'){
+            alert(id);
+        }
     }
 
 }

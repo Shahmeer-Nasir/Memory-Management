@@ -48,19 +48,19 @@
             <div id="option-c" class="option">
 
                 <!-- First fit -->
-                <input type="radio" id="firstfit" name="algo" onclick="CheckRamPartitionSize()">
+                <input type="radio" id="firstfit" name="algo" onclick="CheckRamPartitionSize(this.id)">
                 <label for="firstfit">First Fit</label>
 
                 <!-- Next fit -->
-                <input type="radio" id="nextfit" name="algo" onclick="NextFit(this.id)">
+                <input type="radio" id="nextfit" name="algo" onclick="CheckRamPartitionSize(this.id)">
                 <label for="nextfit">Next Fit</label>
 
                 <!-- Best fit -->
-                <input type="radio" id="bestfit" name="algo" onclick="BestFit(this.id)">
+                <input type="radio" id="bestfit" name="algo" onclick="CheckRamPartitionSize(this.id)">
                 <label for="bestfit">Best Fit</label>
 
                 <!-- Worst fit -->
-                <input type="radio" id="worstfit" name="algo" onclick="WorstFit(this.id)">
+                <input type="radio" id="worstfit" name="algo" onclick="CheckRamPartitionSize(this.id)">
                 <label for="worstfit">Worst Fit</label>
                 
             </div>
