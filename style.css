@@ -35,7 +35,6 @@ h1 {
 }
 
 .output-container {
-    /* border: 1px solid green; */
     background-color: #191919;
     width: 65%;
     height: 100%;
@@ -50,3 +49,39 @@ h1 {
 #output {
     background-color: #878787;
 }
+
+#ram-size {
+    color: #fff;
+    position: absolute;
+    top: 150px;
+    right: 205px;
+}
+
+#ram {
+    border: 2px solid brown;
+    display: flex;
+    box-sizing: border-box;
+    justify-content: space-evenly;
+    height: 200px;
+    width: 450px;
+    transform: rotate(90deg);
+    position: absolute;
+    top: 300px;
+    right: 0;
+}
+
+.partition {
+    display: grid;
+    place-items: center;
+    border-right: 2px solid brown;
+    width: 100%;
+}
+
+.partition > div {
+    display: flex;
+    color: #fff;
+    transform: rotate(-90deg);
+}
+
+
+

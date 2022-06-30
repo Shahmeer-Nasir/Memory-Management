@@ -29,20 +29,20 @@
 
                 <!-- Memory Size -->
                 <label for="memory">Memory Size</label>
-                <input type="input" id="memory" name="memory" onclick="UpdateMemory(this.id)">
+                <input type="range" min="4" max="32" step="2" id="memory" name="memory" onchange="UpdateMemory(this.id)">
 
                 <br>
 
                 <!-- Partitions -->
                 <label for="partitions">Partitions</label>
-                <input type="input" id="partitions" name="partitions" onclick="UpdatePartitions(this.id)">
+                <input type="range" min="1" max="16" id="partitions" name="partitions" onchange="UpdatePartitions(this.id)">
 
             </div>
             <div id="option-c" class="option">
 
                 <!-- Partion Size -->
                 <label for="part-size">Partition Size</label>
-                <input type="input" id="part-size" name="memory" onclick="UpdateMemory(this.id)">
+                <input type="range" id="part-size" name="memory" onclick="UpdateMemory(this.id)">
                 
             </div>
 
@@ -69,9 +69,13 @@
 
         </div>
         <div class="output-container">
-            <p id="output">
-                something
-            </p>
+
+            <div id="ram-size">0 MB</div>
+            <div id="ram">
+                <div class="partition"><div>8 MB</div></div>
+                <div class="partition"></div>
+                <div class="partition"></div>
+            </div>
         </div>
     </div>
     
