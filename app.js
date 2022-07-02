@@ -1,12 +1,13 @@
 
 function SetValues() {
 
-    document.getElementById('memory').value = 4;
-    document.getElementById('partitions').value = 1;
-    document.getElementById('processes').value = 1;
+    document.getElementById('memory-opt').value = 4;
+    document.getElementById('partitions-opt').value = 1;
+    document.getElementById('processes-opt').value = 1;
 }
 
 function AddPartition(memory_size, part_num){
+    // ---------------- WORKING HERE -------------
 
     size = Math.floor(Math.random() * memory_size / 2) + 2;
 
@@ -49,13 +50,13 @@ function UpdateType(id) {
     SetValues();
     
     if(id == 'static') {
-        document.getElementById('partitions').disabled = false;
-        document.getElementById('part-size').disabled = false;
+        document.getElementById('partitions-opt').disabled = false;
+        // document.getElementById('part-size').disabled = false;
+        document.getElementById('memory').innerHTML = '';
     }
     else if (id == 'dynamic') {
-        document.getElementById('partitions').disabled = true;
-        document.getElementById('part-size').disabled = true;
-
+        document.getElementById('partitions-opt').disabled = true;
+        // document.getElementById('part-size').disabled = true;
         document.getElementById('memory').innerHTML = '';
     }
 }
@@ -67,11 +68,18 @@ function UpdateMemory(id) {
     document.getElementById('process-stack').innerHTML = '';
     document.getElementById('memory').innerHTML = '';
 
-    let max_partition = memory_size / 2;
+    if(memory_size > 14) {
+        alert('memory size > 14:' + memory_size);
+        let max_partition = 7;
+    }
+    else {
+        alert('memory size <= 14:' + memory_size);
+        let max_partition = memory_size / 2;
+    }
 
-    document.getElementById('processes').max = max_partition;
+    document.getElementById('processes-opt').max = max_partition;
     document.getElementById('process-max').innerHTML = max_partition;
-    document.getElementById('partitions').max = max_partition;
+    document.getElementById('partitions-opt').max = max_partition;
     document.getElementById('part-max').innerHTML = max_partition;
 
 }

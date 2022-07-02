@@ -82,6 +82,7 @@ h1 {
 
 #memory {
     /* border: 1px solid black; */
+    width: 45%;
 }
 
 .proc {
@@ -102,7 +103,7 @@ h1 {
     width: 5px;
     height: 90%;
     top: 5%;
-    left: 25%;
+    left: 60px;
 }
 
 .part::after {

@@ -20,12 +20,12 @@
             <div class="option">
 
                 <!-- Static partition -->
-                <input type="radio" id="static" name="partition-type" onclick="UpdateType(this.id)">
+                <input type="radio" id="static-opt" name="partition-type" onclick="UpdateType(this.id)">
                 <label for="static">Static</label>
                 <br>
                 
                 <!-- Dynamic partition -->
-                <input type="radio" id="dynamic" name="partition-type" onclick="UpdateType(this.id)">
+                <input type="radio" id="dynamic-opt" name="partition-type" onclick="UpdateType(this.id)">
                 <label for="dynamic">Dynamic</label>
                 
             </div>
@@ -35,7 +35,7 @@
                 <label for="memory">Memory Size</label>
                 <br>
                 <label for="memory">4</label>
-                <input type="range" min="4" max="32" step="2" id="memory" name="memory" onchange="UpdateMemory(this.id)">
+                <input type="range" min="4" max="32" step="2" id="memory-opt" name="memory" onchange="UpdateMemory(this.id)">
                 <label for="memory">32</label>
 
                 <br><br>
@@ -44,8 +44,9 @@
                 <label for="partitions">Partitions</label>
                 <br>
                 <label for="partitions">1</label>
-                <input type="range" min="1" max="16" id="partitions" name="partitions" onchange="UpdatePartitions(this.id)">
-                <label id="part-max" for="partitions">16</label>
+                <!-- // ---------------- WORKING HERE ------------- -->
+                <input type="range" min="1" max="7" id="partitions-opt" name="partitions" onchange="UpdatePartitions(this.id)">
+                <label id="part-max" for="partitions">7</label>
 
             </div>
 
@@ -55,8 +56,8 @@
                 <label for="processes">Processes</label>
                 <br>
                 <label for="processes">1</label>
-                <input type="range" min="1" max="2" id="processes" name="processes" onchange="UpdateProcesses(this.id)">
-                <label id="process-max" for="processes">2</label>
+                <input type="range" min="1" max="7" id="processes-opt" name="processes" onchange="UpdateProcesses(this.id)">
+                <label id="process-max" for="processes">7</label>
                 
             </div>
 
@@ -104,6 +105,9 @@
                     <div class="proc">P4: <input type="text" id="proc-4"></div>
                 </div>
             </div>
+
+
+            <!-- // ---------------- WORKING HERE ------------- -->
 
             <!-- Memory container -->
             <div class="memory-container">
