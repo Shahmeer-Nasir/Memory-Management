@@ -47,6 +47,17 @@
 
             <div id="option-c" class="option">
 
+                <!-- Processes -->
+                <label for="processes">Processes</label>
+                <br>
+                <label for="processes">1</label>
+                <input type="range" min="1" max="2" id="processes" name="processes" onchange="UpdateProcesses(this.id)">
+                <label id="process-max" for="processes">2</label>
+                
+            </div>
+
+            <div id="option-d" class="option">
+
                 <!-- First fit -->
                 <input type="radio" id="firstfit" name="algo" onclick="CheckRamPartitionSize(this.id)">
                 <label for="firstfit">First Fit</label>
@@ -65,9 +76,14 @@
                 
             </div>
             
+            
 
         </div>
         <div class="output-container">
+
+            <div id="process-container">
+                <div class="process"><input type="text"></div>
+            </div>
 
             <div id="ram-size">0</div><div id="ram-unit">MB</div>
             <div id="ram">

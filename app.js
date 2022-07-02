@@ -22,6 +22,23 @@ function AddPartition(ram_size, part_num){
     return ram_size - size;
 }
 
+function AddProcess(process_size, process_num) {
+
+    size = Math.floor(Math.random() * ram_size / 2) + 2;
+
+    const container = document.getElementById('process-container');
+
+    const node = document.createElement('div');
+    const node1 = document.createElement('input');
+
+    node1.type = 'text';
+    node1.value = size;
+    node1.id = 'process-' + process_num;
+    node.appendChild(node1);
+    node.className = 'process';
+    container.appendChild(node);
+}
+
 
 function UpdateType(id) {
     
@@ -41,10 +58,13 @@ function UpdateMemory(id) {
 
     ram_size = document.getElementById(id).value;
     document.getElementById('ram-size').innerHTML = ram_size;
+    document.getElementById('process-container').innerHTML = '';
     document.getElementById('ram').innerHTML = '';
 
     let max_partition = ram_size / 2;
 
+    document.getElementById('processes').max = max_partition;
+    document.getElementById('process-max').innerHTML = max_partition;
     document.getElementById('partitions').max = max_partition;
     document.getElementById('part-max').innerHTML = max_partition;
 
@@ -59,6 +79,18 @@ function UpdatePartitions(id) {
 
     for(i = 0; i < partitions; i++) {
         max_part_size = AddPartition(max_part_size, i + 1);
+    }
+}
+
+function UpdateProcesses(id) {
+
+    processes = document.getElementById(id).value;
+    document.getElementById('process-container').innerHTML = '';
+    ram_size = document.getElementById('ram-size').innerHTML;
+    max_process_size = ram_size / 2;
+
+    for(i = 0; i < processes; i++) {
+        max_process_size = AddProcess(max_process_size, i + 1);
     }
 }
 

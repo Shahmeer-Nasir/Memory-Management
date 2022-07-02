@@ -58,7 +58,7 @@ h1 {
     right: 205px;
 }
 
-#ram {
+#ram, #process-container {
     border: 2px solid brown;
     display: flex;
     box-sizing: border-box;
@@ -71,14 +71,18 @@ h1 {
     right: 0;
 }
 
-.partition {
+#process-container {
+    right: 500px;
+}
+
+.partition, .process {
     display: grid;
     place-items: center;
     border-right: 2px solid brown;
     width: 100%;
 }
 
-.partition > input {
+.partition > input, .process > input {
     background-color: #191919;
     border: none;
     width: 25px;
@@ -91,6 +95,5 @@ h1 {
     color: #fff;
     transform: rotate(-90deg);
 }
-
 
 
