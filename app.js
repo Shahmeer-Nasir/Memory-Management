@@ -1,4 +1,7 @@
 
+// Partitions spacing constant
+const spacing = 5;
+
 function SetValues() {
 
     document.getElementById('memory-opt').value = 4;
@@ -7,9 +10,7 @@ function SetValues() {
 }
 
 function AddPartition(memory_size, part_num){
-    // ---------------- WORKING HERE -------------
 
-    // alert('Starting to AddPartition');
     size = Math.floor(Math.random() * memory_size / 2) + 2;
 
     const memory = document.getElementById('memory');
@@ -29,14 +30,13 @@ function AddPartition(memory_size, part_num){
     proc_part.className = 'proc-part';
     proc_part.type = 'text';
     proc_part.id = 'proc-part-' + part_num;
-    proc_part.style.padding = (size * 5) + 'px 0';
+    proc_part.style.padding = (size * spacing) + 'px 0';
     proc_part.value = 0;
 
     part.appendChild(mem_part);
     part.appendChild(proc_part);
     memory.appendChild(part);
 
-    // alert('AddPartition completed');
     return memory_size - size;
 }
 
@@ -44,20 +44,19 @@ function UpdatePartSize(part_num) {
 
     const proc_part = document.getElementById('proc-part-' + part_num);
     mem_part_size = document.getElementById('mem-part-' + part_num).value;
-    proc_part.style.padding = (mem_part_size * 5) + 'px 0';
+    proc_part.style.padding = (mem_part_size * spacing) + 'px 0';
 }
 
 function UpdateProcSize(proc_num) {
 
     const proc = document.getElementById('proc-' + proc_num);
     proc_part_size = document.getElementById('proc-' + proc_num).value;
-    proc.style.padding = (proc_part_size * 5) + 'px 0';
+    proc.style.padding = (proc_part_size * spacing) + 'px 0';
 }
 
 function AddProcess(process_size, proc_num) {
 
-    // alert('AddProcess start');
-    size = Math.floor(Math.random() * memory_size / 2) + 2;
+    size = Math.floor(Math.random() * process_size / 2) + 2;
 
     const process_stack = document.getElementById('process-stack');
 
@@ -69,7 +68,7 @@ function AddProcess(process_size, proc_num) {
     const proc_inp = document.createElement('input');
     proc_inp.type = 'text';
     proc_inp.id = 'proc-' + proc_num;
-    proc_inp.style.padding = (size * 5) + 'px 0';
+    proc_inp.style.padding = (size * spacing) + 'px 0';
     proc_inp.setAttribute("onchange", "UpdateProcSize(" + proc_num + ")");
     proc_inp.value = size;
 
@@ -77,7 +76,7 @@ function AddProcess(process_size, proc_num) {
     proc.appendChild(proc_inp);
     process_stack.appendChild(proc);
 
-    // alert('AddProcess completed');
+    return process_size - size;
 }
 
 
@@ -87,12 +86,10 @@ function UpdateType(id) {
     
     if(id == 'static') {
         document.getElementById('partitions-opt').disabled = false;
-        // document.getElementById('part-size').disabled = false;
         document.getElementById('memory').innerHTML = '';
     }
     else if (id == 'dynamic') {
         document.getElementById('partitions-opt').disabled = true;
-        // document.getElementById('part-size').disabled = true;
         document.getElementById('memory').innerHTML = '';
     }
 }
@@ -134,6 +131,7 @@ function UpdatePartitions(id) {
 function UpdateProcesses(id) {
 
     processes = document.getElementById(id).value;
+    document.getElementById('num-of-processes').innerHTML = processes;
     document.getElementById('process-stack').innerHTML = '';
     memory_size = document.getElementById('memory-size').innerHTML;
     max_process_size = memory_size / 2;

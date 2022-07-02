@@ -63,7 +63,6 @@ h1 {
 
 .process-container, .memory-container {
     box-sizing: border-box;
-    border: 1px solid black;
     display: grid;
     place-items: center;
     width: 50%;
@@ -81,7 +80,6 @@ h1 {
 }
 
 #memory {
-    /* border: 1px solid black; */
     width: 45%;
 }
 
