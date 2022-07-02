@@ -1,4 +1,11 @@
 
+function SetValues() {
+
+    document.getElementById('memory').value = 4;
+    document.getElementById('partitions').value = 1;
+    document.getElementById('processes').value = 1;
+}
+
 function AddPartition(ram_size, part_num){
 
     size = Math.floor(Math.random() * ram_size / 2) + 2;

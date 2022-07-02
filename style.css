@@ -46,7 +46,7 @@ h1 {
     background-color: #878787;
 }
 
-#ram-size, #ram-unit {
+#ram-size, #ram-unit, #process-label {
     color: #fff;
     position: absolute;
     top: 150px;
@@ -56,6 +56,10 @@ h1 {
 #ram-unit {
     top: 150px;
     right: 205px;
+}
+
+#process-label {
+    right: 680px;
 }
 
 #ram, #process-container {
