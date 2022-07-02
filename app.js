@@ -9,7 +9,6 @@ function SetValues() {
 function AddPartition(ram_size, part_num){
 
     size = Math.floor(Math.random() * ram_size / 2) + 2;
-    // alert('ram_size: ' + ram_size + '\nsize: ' + size);
 
     const ram = document.getElementById('ram');
 
@@ -18,9 +17,7 @@ function AddPartition(ram_size, part_num){
     node1.type = 'text';
     node1.value = size;
     node1.id = 'partition-' + part_num;
-    // const partition_size = document.createTextNode(size);
 
-    // node1.appendChild(partition_size);
     node.appendChild(node1);
     node.className = 'partition';
 
@@ -101,6 +98,69 @@ function UpdateProcesses(id) {
     }
 }
 
+function SwapIn(process_num, process_size) {
+
+    const ram = document.getElementById('ram');
+
+    const node = document.createElement('div')
+    const node1 = document.createElement('input');
+    node1.type = 'text';
+    node1.readOnly = true;
+    alert('readOnly true ran');
+    node1.value = process_size;
+    node1.id = 'process-' + process_num;
+
+    node.appendChild(node1);
+    node.className = 'process';
+
+    ram.appendChild(node);
+}
+
+function FirstFit(type) {
+
+    if(type == 'dynamic') {
+
+        rem_ram_size = document.getElementById('ram-size').innerHTML;
+        processes = document.getElementById('processes').value;
+        alert("I'm here");
+
+        for(i = 0; i < processes; i++) {
+
+            process_size = document.getElementById('process-' + (i + 1)).value;
+
+            if(rem_ram_size >= process_size) {
+                SwapIn(i + 1, process_size);
+                rem_ram_size = rem_ram_size - process_size;
+                alert('rem_ram_size: ' + rem_ram_size);
+            }
+
+        }
+
+    }
+    else if(type == 'static') {
+        alert('static selected!');
+    }
+}
+
+function CheckAlgo(id, type) {
+
+    if(id == 'firstfit'){
+        alert('Algo: ' + id + '\nType: ' + type);
+        FirstFit(type);
+    }
+    else if(id == 'nextfit'){
+        alert('Algo: ' + id + '\nType: ' + type);
+        NextFit(type);
+    }
+    else if(id == 'bestfit'){
+        alert('Algo: ' + id + '\nType: ' + type);
+        BestFit(type);
+    }
+    else if(id == 'worstfit'){
+        alert('Algo: ' + id + '\nType: ' + type);
+        WorstFit(type);
+    }
+}
 
 function CheckRamPartitionSize(id) {
 
@@ -108,31 +168,36 @@ function CheckRamPartitionSize(id) {
     ram_size = document.getElementById('ram-size').innerHTML;
     total_partition_size = 0;
 
+    // Calculating total partition size
     for(i = 0; i < partitions; i++){
         size = document.getElementById('partition-' + (i + 1)).value;
         size = Number(size);
         total_partition_size += size;
     }
 
+    // Checking total partition size and ram size equality
     if(total_partition_size != ram_size) {
         alert('Total partition size must be equal to RAM size!');
     }
-
     else {
-        if(id == 'firstfit'){
-            alert(id);
-        }
-        else if(id == 'nextfit'){
-            alert(id);
-        }
-        else if(id == 'bestfit'){
-            alert(id);
-        }
-        else if(id == 'worstfit'){
-            alert(id);
-        }
+        CheckAlgo(id, 'static');
     }
 
+}
+
+function CheckType(id) {
+
+    static = document.getElementById('static').checked;
+
+    // Checking type (static/dynamic)
+    if(static == true) {
+        alert('static true!');
+        CheckRamPartitionSize(id);
+    }
+    else if (static == false) {
+        alert('dynamic true!');
+        CheckAlgo(id, 'dynamic');
+    }
 }
 
     
