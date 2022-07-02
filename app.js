@@ -106,14 +106,14 @@ function SwapIn(process_num, process_size) {
     const node1 = document.createElement('input');
     node1.type = 'text';
     node1.readOnly = true;
-    alert('readOnly true ran');
-    node1.value = process_size;
+    node1.value = 'P' + process_num + ': ' + process_size + ' MB';
     node1.id = 'process-' + process_num;
 
     node.appendChild(node1);
     node.className = 'process';
 
     ram.appendChild(node);
+    // alert('process swapped');
 }
 
 function FirstFit(type) {
@@ -121,17 +121,20 @@ function FirstFit(type) {
     if(type == 'dynamic') {
 
         rem_ram_size = document.getElementById('ram-size').innerHTML;
+        rem_ram_size = Number(rem_ram_size);
         processes = document.getElementById('processes').value;
-        alert("I'm here");
 
         for(i = 0; i < processes; i++) {
+            // alert('processes: ' + processes + '\niteration: ' + i);
 
             process_size = document.getElementById('process-' + (i + 1)).value;
+            process_size = Number(process_size);
+            // alert('process-' + (i + 1) + ' size: ' + process_size);
 
             if(rem_ram_size >= process_size) {
                 SwapIn(i + 1, process_size);
                 rem_ram_size = rem_ram_size - process_size;
-                alert('rem_ram_size: ' + rem_ram_size);
+                // alert('rem_ram_size: ' + rem_ram_size);
             }
 
         }
@@ -145,7 +148,7 @@ function FirstFit(type) {
 function CheckAlgo(id, type) {
 
     if(id == 'firstfit'){
-        alert('Algo: ' + id + '\nType: ' + type);
+        // alert('Algo: ' + id + '\nType: ' + type);
         FirstFit(type);
     }
     else if(id == 'nextfit'){
@@ -191,11 +194,11 @@ function CheckType(id) {
 
     // Checking type (static/dynamic)
     if(static == true) {
-        alert('static true!');
+        // alert('static true!');
         CheckRamPartitionSize(id);
     }
     else if (static == false) {
-        alert('dynamic true!');
+        // alert('dynamic true!');
         CheckAlgo(id, 'dynamic');
     }
 }

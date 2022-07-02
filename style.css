@@ -100,4 +100,6 @@ h1 {
     transform: rotate(-90deg);
 }
 
-
+#ram > .process > input {
+    width: 50px;
+}
