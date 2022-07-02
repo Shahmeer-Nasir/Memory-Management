@@ -47,21 +47,37 @@ function UpdatePartSize(part_num) {
     proc_part.style.padding = (mem_part_size * 5) + 'px 0';
 }
 
-function AddProcess(process_size, process_num) {
+function UpdateProcSize(proc_num) {
 
+    const proc = document.getElementById('proc-' + proc_num);
+    proc_part_size = document.getElementById('proc-' + proc_num).value;
+    proc.style.padding = (proc_part_size * 5) + 'px 0';
+}
+
+function AddProcess(process_size, proc_num) {
+
+    // alert('AddProcess start');
     size = Math.floor(Math.random() * memory_size / 2) + 2;
 
-    const container = document.getElementById('process-stack');
+    const process_stack = document.getElementById('process-stack');
 
-    const node = document.createElement('div');
-    const node1 = document.createElement('input');
+    const proc = document.createElement('div');
+    proc.className = 'proc';
 
-    node1.type = 'text';
-    node1.value = size;
-    node1.id = 'process-' + process_num;
-    node.appendChild(node1);
-    node.className = 'process';
-    container.appendChild(node);
+    const text_start = document.createTextNode('P' + proc_num + ': ');
+
+    const proc_inp = document.createElement('input');
+    proc_inp.type = 'text';
+    proc_inp.id = 'proc-' + proc_num;
+    proc_inp.style.padding = (size * 5) + 'px 0';
+    proc_inp.setAttribute("onchange", "UpdateProcSize(" + proc_num + ")");
+    proc_inp.value = size;
+
+    proc.appendChild(text_start);
+    proc.appendChild(proc_inp);
+    process_stack.appendChild(proc);
+
+    // alert('AddProcess completed');
 }
 
 
