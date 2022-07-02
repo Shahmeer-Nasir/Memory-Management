@@ -7,10 +7,6 @@ body {
     font-family: 'Courier New', Courier, monospace;
 }
 
-input {
-    all: unset;
-}
-
 .heading-container {
     background-color: rgb(230, 238, 82);
     box-sizing: border-box;
@@ -36,15 +32,15 @@ h1 {
 
 .input-container {
     box-sizing: border-box;
-    padding: 0 5%;
+    padding: 0 3%;
     width: 25%;
     height: 100%;
 }
 
 .option {
     background-color: rgba(230, 238, 82, 0.25);
-    margin-top: 50px;
-    padding: 30px 30px;
+    margin-top: 8%;
+    padding: 10%;
 }
 
 .division {
@@ -70,8 +66,12 @@ h1 {
     height: 100%;
 }
 
+.output-container input {
+    all: unset;
+}
+
 #process-stack {
-    
+    text-align: center;
 }
 
 .proc {
