@@ -186,7 +186,7 @@ function CheckRamPartitionSize(id) {
         CheckAlgo(id, 'static');
     }
 
-}
+} 
 
 function CheckType(id) {
 

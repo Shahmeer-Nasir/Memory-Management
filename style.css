@@ -88,7 +88,7 @@ h1 {
 
 .partition > input, .process > input {
     background-color: #191919;
-    border: none;
+    border: none; 
     width: 25px;
     height: 25px;
     text-align: center;
