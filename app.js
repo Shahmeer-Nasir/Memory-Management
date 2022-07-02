@@ -45,6 +45,8 @@ function AddProcess(process_size, process_num) {
 
 
 function UpdateType(id) {
+
+    SetValues();
     
     if(id == 'static') {
         document.getElementById('partitions').disabled = false;
@@ -106,11 +108,11 @@ function SwapIn(process_num, process_size) {
     const node1 = document.createElement('input');
     node1.type = 'text';
     node1.readOnly = true;
-    node1.value = 'P' + process_num + ': ' + process_size + ' MB';
-    node1.id = 'process-' + process_num;
+    node1.value = 'P' + process_num + ':' + process_size;
+    node1.id = 'swapped-process-' + process_num;
 
     node.appendChild(node1);
-    node.className = 'process';
+    node.className = 'partition';
 
     ram.appendChild(node);
     // alert('process swapped');
@@ -134,14 +136,50 @@ function FirstFit(type) {
             if(rem_ram_size >= process_size) {
                 SwapIn(i + 1, process_size);
                 rem_ram_size = rem_ram_size - process_size;
-                // alert('rem_ram_size: ' + rem_ram_size);
+                alert('rem_ram_size: ' + rem_ram_size);
             }
 
         }
 
     }
     else if(type == 'static') {
-        alert('static selected!');
+        // alert('static selected!');
+
+        partitions = Number(document.getElementById('partitions').value);
+        processes = Number(document.getElementById('processes').value);
+
+        for(i = 0; i < processes; i++) {
+            
+            proc_size = document.getElementById('process-' + (i + 1)).value;
+            proc_size = Number(proc_size);
+            // alert('hello');
+            for(j = 0; j < partitions; j++) {
+                // alert('process ' + i + '\npartition ' + j)
+                
+                const partition = document.getElementById('partition-' + (j + 1));
+                if(partition.readOnly == false) {
+
+                    part_size = partition.value;
+                    part_size = Number(part_size);
+                    if(proc_size <= part_size) {
+                        document.getElementById('partition-' + (j + 1)).value =
+                        'P' + (i + 1) + ':' + proc_size;
+                        document.getElementById('partition-' + (j + 1)).readOnly = 'true';
+                        break;
+                    }
+                }
+                // alert('last line of j');
+            }
+        }
+
+        while(proc_num <= partitions && part_num <= partitions) {
+            if(proc_size <= part_size) {
+                document.getElementById('partition-' + part_num).value =
+                'p' + proc_num + ':' + proc_size;
+                proc_num++;
+            }
+            part_num++;
+        }
     }
 }
 

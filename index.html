@@ -9,8 +9,11 @@
     <title>Memory Management by Shah</title>
 </head>
 <body onload="SetValues()">
-    <h1>Memory Management Algorithms</h1>
-    <div class="container">
+    <div class="heading-container">
+        <h1>Memory Management Algorithms</h1>
+    </div>
+    
+    <div class="content-container">
         
         <div class="input-container">
 
@@ -19,7 +22,8 @@
                 <!-- Static partition -->
                 <input type="radio" id="static" name="partition-type" onclick="UpdateType(this.id)">
                 <label for="static">Static</label>
-
+                <br>
+                
                 <!-- Dynamic partition -->
                 <input type="radio" id="dynamic" name="partition-type" onclick="UpdateType(this.id)">
                 <label for="dynamic">Dynamic</label>
@@ -61,15 +65,18 @@
                 <!-- First fit -->
                 <input type="radio" id="firstfit" name="algo" onclick="CheckType(this.id)">
                 <label for="firstfit">First Fit</label>
-
+                <br>
+                
                 <!-- Next fit -->
                 <input type="radio" id="nextfit" name="algo" onclick="CheckType(this.id)">
                 <label for="nextfit">Next Fit</label>
-
+                <br>
+                
                 <!-- Best fit -->
                 <input type="radio" id="bestfit" name="algo" onclick="CheckType(this.id)">
                 <label for="bestfit">Best Fit</label>
-
+                <br>
+                
                 <!-- Worst fit -->
                 <input type="radio" id="worstfit" name="algo" onclick="CheckType(this.id)">
                 <label for="worstfit">Worst Fit</label>
@@ -79,6 +86,9 @@
             
 
         </div>
+
+        <div class="division"></div>
+
         <div class="output-container">
 
             <div id="process-label">Processes</div>
@@ -93,6 +103,6 @@
     </div>
     
 
-    <script src="app.js"></script>
+    <!-- <script src="app.js"></script> -->
 </body>
 </html>

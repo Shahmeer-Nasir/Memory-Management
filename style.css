@@ -4,42 +4,55 @@
 }
 
 body {
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.heading-container {
+    background-color: rgb(230, 238, 82);
+    box-sizing: border-box;
+    height: 10%;
+    width: 100%;
+    display: grid;
+    place-items: center;
 }
 
 h1 {
-    background-color: rgb(98, 248, 190);
-    box-sizing: border-box;
-    display: block;
-    width: 100%;
-    height: 10%;
     text-align: center;
-    padding: 10px 0;
+    font-size: 3em;
 }
 
-.container {
+.content-container {
     display: flex;
+    align-items: center;
     width: 100%;
     height: 90%;
+    font-weight: 900;
+    background-color: #f2f2f2;
 }
 
 .input-container {
-    background-color: #494949;
-    padding: 0 20px;
-    width: 35%;
+    box-sizing: border-box;
+    padding: 0 5%;
+    width: 25%;
     height: 100%;
 }
 
+.division {
+    background-color: rgba(25, 25, 25, 0.5);
+    height: 95%;
+    width: 3px;
+    border-radius: 10px;
+}
+
 .output-container {
-    background-color: #191919;
-    width: 65%;
+    width: 75%;
     height: 100%;
 }
 
 .option {
-    border: 1px solid red;
-    margin-top: 20px;
-    padding: 20px 30px;
+    background-color: rgba(230, 238, 82, 0.25);
+    margin-top: 50px;
+    padding: 30px 30px;
 }
 
 #output {
@@ -68,10 +81,10 @@ h1 {
     box-sizing: border-box;
     justify-content: space-evenly;
     height: 200px;
-    width: 450px;
+    width: 550px;
     transform: rotate(90deg);
     position: absolute;
-    top: 300px;
+    top: 350px;
     right: 0;
 }
 
@@ -87,9 +100,11 @@ h1 {
 }
 
 .partition > input, .process > input {
+    all: unset;
+    overflow: visible;
     background-color: #191919;
     border: none; 
-    width: 25px;
+    width: 30px;
     height: 25px;
     text-align: center;
     padding: 0;
@@ -100,6 +115,14 @@ h1 {
     transform: rotate(-90deg);
 }
 
-#ram > .process > input {
-    width: 50px;
+.green {
+    background-color: darkgreen;
 }
+
+/* #ram > .process {
+    background-color: darkolivegreen;
+} */
+
+/* #ram > .partition > # {
+    width: 50px;
+} */
