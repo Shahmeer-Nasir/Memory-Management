@@ -57,6 +57,10 @@ h1 {
     height: 100%;
 }
 
+.output-container input {
+    all: unset;
+}
+
 .process-container, .memory-container {
     box-sizing: border-box;
     border: 1px solid black;
@@ -66,20 +70,53 @@ h1 {
     height: 100%;
 }
 
-.output-container input {
-    all: unset;
+.process-label, .memory-label {
+    font-size: 1.5em;
 }
 
-#process-stack {
+#process-stack, #memory {
+    box-sizing: border-box;
+    width: 35%;
     text-align: center;
+}
+
+#memory {
+    /* border: 1px solid black; */
 }
 
 .proc {
     box-sizing: border-box;
-    border: 1px solid black;
+    border: 2px solid black;
 }
 
-.proc > input {
+.part {
+    position: relative;
+    display: flex;
+}
+
+.part::before {
+    content: '';
+    position: absolute;
+    background-color: red;
+    border-radius: 10px 0 0 10px;
+    width: 5px;
+    height: 90%;
+    top: 5%;
+    left: 25%;
+}
+
+.part::after {
+    content: '';
+    position: absolute;
+    background-color: rgba(230, 238, 82, 0.25);
+    width: 40px;
+    height: 85%;
+    top: 5%;
+    left: 3%;
+    z-index: 1;
+}
+
+.proc > input, .part > input {
     width: 50px;
 }
 
@@ -99,18 +136,37 @@ h1 {
     padding: 10 0;
 }
 
-#process-stack, .process-label {
-    border: 1px solid red;
+#proc-part-1 {
+    padding: 40 0;
 }
 
-#process-stack {
+#proc-part-2 {
+    padding: 50 0;
+}
+
+#proc-part-3 {
+    padding: 30 0;
+}
+
+#proc-part-4 {
+    padding: 10 0;
+}
+
+#proc-part-5 {
+    padding: 10 0;
+}
+
+.part > .mem-part {
+    background: transparent;
+    margin-right: 8%;
+    z-index: 10;
+}
+
+.part > .proc-part {
+    width: 90%;
     box-sizing: border-box;
-    width: 35%;
+    border: 2px solid black;
 }
-
-
-
-
 
 /* #output {
     background-color: #878787;
