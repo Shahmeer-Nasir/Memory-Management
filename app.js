@@ -9,22 +9,42 @@ function SetValues() {
 function AddPartition(memory_size, part_num){
     // ---------------- WORKING HERE -------------
 
+    // alert('Starting to AddPartition');
     size = Math.floor(Math.random() * memory_size / 2) + 2;
 
     const memory = document.getElementById('memory');
 
-    const node = document.createElement('div')
-    const node1 = document.createElement('input');
-    node1.type = 'text';
-    node1.value = size;
-    node1.id = 'partition-' + part_num;
+    const part = document.createElement('div')
+    part.className = 'part';
+    part.id = 'cont-part-' + part_num;
 
-    node.appendChild(node1);
-    node.className = 'partition';
+    const mem_part = document.createElement('input');
+    mem_part.className = 'mem-part';
+    mem_part.type = 'text';
+    mem_part.id = 'mem-part-' + part_num;
+    mem_part.setAttribute("onchange", "UpdatePartSize(" + part_num + ")");
+    mem_part.value = size;
 
-    memory.appendChild(node);
+    const proc_part = document.createElement('input');
+    proc_part.className = 'proc-part';
+    proc_part.type = 'text';
+    proc_part.id = 'proc-part-' + part_num;
+    proc_part.style.padding = (size * 5) + 'px 0';
+    proc_part.value = 0;
 
+    part.appendChild(mem_part);
+    part.appendChild(proc_part);
+    memory.appendChild(part);
+
+    // alert('AddPartition completed');
     return memory_size - size;
+}
+
+function UpdatePartSize(part_num) {
+
+    const proc_part = document.getElementById('proc-part-' + part_num);
+    mem_part_size = document.getElementById('mem-part-' + part_num).value;
+    proc_part.style.padding = (mem_part_size * 5) + 'px 0';
 }
 
 function AddProcess(process_size, process_num) {
@@ -68,13 +88,12 @@ function UpdateMemory(id) {
     document.getElementById('process-stack').innerHTML = '';
     document.getElementById('memory').innerHTML = '';
 
+    let max_partition
     if(memory_size > 14) {
-        alert('memory size > 14:' + memory_size);
-        let max_partition = 7;
+        max_partition = 7;
     }
     else {
-        alert('memory size <= 14:' + memory_size);
-        let max_partition = memory_size / 2;
+        max_partition = memory_size / 2;
     }
 
     document.getElementById('processes-opt').max = max_partition;
