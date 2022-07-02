@@ -7,6 +7,10 @@ body {
     font-family: 'Courier New', Courier, monospace;
 }
 
+input {
+    all: unset;
+}
+
 .heading-container {
     background-color: rgb(230, 238, 82);
     box-sizing: border-box;
@@ -37,25 +41,78 @@ h1 {
     height: 100%;
 }
 
-.division {
-    background-color: rgba(25, 25, 25, 0.5);
-    height: 95%;
-    width: 3px;
-    border-radius: 10px;
-}
-
-.output-container {
-    width: 75%;
-    height: 100%;
-}
-
 .option {
     background-color: rgba(230, 238, 82, 0.25);
     margin-top: 50px;
     padding: 30px 30px;
 }
 
-#output {
+.division {
+    background-color: rgba(25, 25, 25, 0.5);
+    height: 90%;
+    width: 3px;
+    border-radius: 10px;
+}
+
+.output-container {
+    box-sizing: border-box;
+    display: flex;
+    width: 75%;
+    height: 100%;
+}
+
+.process-container, .memory-container {
+    box-sizing: border-box;
+    border: 1px solid black;
+    display: grid;
+    place-items: center;
+    width: 50%;
+    height: 100%;
+}
+
+#process-stack {
+    
+}
+
+.proc {
+    box-sizing: border-box;
+    border: 1px solid black;
+}
+
+.proc > input {
+    width: 50px;
+}
+
+#proc-1 {
+    padding: 50 0;
+}
+
+#proc-2 {
+    padding: 40 0;
+}
+
+#proc-3 {
+    padding: 30 0;
+}
+
+#proc-4 {
+    padding: 10 0;
+}
+
+#process-stack, .process-label {
+    border: 1px solid red;
+}
+
+#process-stack {
+    box-sizing: border-box;
+    width: 35%;
+}
+
+
+
+
+
+/* #output {
     background-color: #878787;
 }
 
@@ -117,7 +174,7 @@ h1 {
 
 .green {
     background-color: darkgreen;
-}
+} */
 
 /* #ram > .process {
     background-color: darkolivegreen;

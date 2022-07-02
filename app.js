@@ -6,11 +6,11 @@ function SetValues() {
     document.getElementById('processes').value = 1;
 }
 
-function AddPartition(ram_size, part_num){
+function AddPartition(memory_size, part_num){
 
-    size = Math.floor(Math.random() * ram_size / 2) + 2;
+    size = Math.floor(Math.random() * memory_size / 2) + 2;
 
-    const ram = document.getElementById('ram');
+    const memory = document.getElementById('memory');
 
     const node = document.createElement('div')
     const node1 = document.createElement('input');
@@ -21,16 +21,16 @@ function AddPartition(ram_size, part_num){
     node.appendChild(node1);
     node.className = 'partition';
 
-    ram.appendChild(node);
+    memory.appendChild(node);
 
-    return ram_size - size;
+    return memory_size - size;
 }
 
 function AddProcess(process_size, process_num) {
 
-    size = Math.floor(Math.random() * ram_size / 2) + 2;
+    size = Math.floor(Math.random() * memory_size / 2) + 2;
 
-    const container = document.getElementById('process-container');
+    const container = document.getElementById('process-stack');
 
     const node = document.createElement('div');
     const node1 = document.createElement('input');
@@ -56,18 +56,18 @@ function UpdateType(id) {
         document.getElementById('partitions').disabled = true;
         document.getElementById('part-size').disabled = true;
 
-        document.getElementById('ram').innerHTML = '';
+        document.getElementById('memory').innerHTML = '';
     }
 }
 
 function UpdateMemory(id) {
 
-    ram_size = document.getElementById(id).value;
-    document.getElementById('ram-size').innerHTML = ram_size;
-    document.getElementById('process-container').innerHTML = '';
-    document.getElementById('ram').innerHTML = '';
+    memory_size = document.getElementById(id).value;
+    document.getElementById('memory-size').innerHTML = memory_size;
+    document.getElementById('process-stack').innerHTML = '';
+    document.getElementById('memory').innerHTML = '';
 
-    let max_partition = ram_size / 2;
+    let max_partition = memory_size / 2;
 
     document.getElementById('processes').max = max_partition;
     document.getElementById('process-max').innerHTML = max_partition;
@@ -79,9 +79,9 @@ function UpdateMemory(id) {
 function UpdatePartitions(id) {
 
     partitions = document.getElementById(id).value;
-    document.getElementById('ram').innerHTML = '';
-    ram_size = document.getElementById('ram-size').innerHTML;
-    max_part_size = ram_size / 2;
+    document.getElementById('memory').innerHTML = '';
+    memory_size = document.getElementById('memory-size').innerHTML;
+    max_part_size = memory_size / 2;
 
     for(i = 0; i < partitions; i++) {
         max_part_size = AddPartition(max_part_size, i + 1);
@@ -91,9 +91,9 @@ function UpdatePartitions(id) {
 function UpdateProcesses(id) {
 
     processes = document.getElementById(id).value;
-    document.getElementById('process-container').innerHTML = '';
-    ram_size = document.getElementById('ram-size').innerHTML;
-    max_process_size = ram_size / 2;
+    document.getElementById('process-stack').innerHTML = '';
+    memory_size = document.getElementById('memory-size').innerHTML;
+    max_process_size = memory_size / 2;
 
     for(i = 0; i < processes; i++) {
         max_process_size = AddProcess(max_process_size, i + 1);
@@ -102,7 +102,7 @@ function UpdateProcesses(id) {
 
 function SwapIn(process_num, process_size) {
 
-    const ram = document.getElementById('ram');
+    const memory = document.getElementById('memory');
 
     const node = document.createElement('div')
     const node1 = document.createElement('input');
@@ -114,7 +114,7 @@ function SwapIn(process_num, process_size) {
     node.appendChild(node1);
     node.className = 'partition';
 
-    ram.appendChild(node);
+    memory.appendChild(node);
     // alert('process swapped');
 }
 
@@ -122,8 +122,8 @@ function FirstFit(type) {
 
     if(type == 'dynamic') {
 
-        rem_ram_size = document.getElementById('ram-size').innerHTML;
-        rem_ram_size = Number(rem_ram_size);
+        rem_memory_size = document.getElementById('memory-size').innerHTML;
+        rem_memory_size = Number(rem_memory_size);
         processes = document.getElementById('processes').value;
 
         for(i = 0; i < processes; i++) {
@@ -133,10 +133,10 @@ function FirstFit(type) {
             process_size = Number(process_size);
             // alert('process-' + (i + 1) + ' size: ' + process_size);
 
-            if(rem_ram_size >= process_size) {
+            if(rem_memory_size >= process_size) {
                 SwapIn(i + 1, process_size);
-                rem_ram_size = rem_ram_size - process_size;
-                alert('rem_ram_size: ' + rem_ram_size);
+                rem_memory_size = rem_memory_size - process_size;
+                alert('rem_memory_size: ' + rem_memory_size);
             }
 
         }
@@ -203,10 +203,10 @@ function CheckAlgo(id, type) {
     }
 }
 
-function CheckRamPartitionSize(id) {
+function CheckMemoryPartitionSize(id) {
 
     partitions = document.getElementById('partitions').value;
-    ram_size = document.getElementById('ram-size').innerHTML;
+    memory_size = document.getElementById('memory-size').innerHTML;
     total_partition_size = 0;
 
     // Calculating total partition size
@@ -216,9 +216,9 @@ function CheckRamPartitionSize(id) {
         total_partition_size += size;
     }
 
-    // Checking total partition size and ram size equality
-    if(total_partition_size != ram_size) {
-        alert('Total partition size must be equal to RAM size!');
+    // Checking total partition size and memory size equality
+    if(total_partition_size != memory_size) {
+        alert('Total partition size must be equal to memory size!');
     }
     else {
         CheckAlgo(id, 'static');
@@ -233,7 +233,7 @@ function CheckType(id) {
     // Checking type (static/dynamic)
     if(static == true) {
         // alert('static true!');
-        CheckRamPartitionSize(id);
+        CheckMemoryPartitionSize(id);
     }
     else if (static == false) {
         // alert('dynamic true!');

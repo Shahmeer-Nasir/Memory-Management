@@ -17,7 +17,7 @@
         
         <div class="input-container">
 
-            <div id="option-a" class="option">
+            <div class="option">
 
                 <!-- Static partition -->
                 <input type="radio" id="static" name="partition-type" onclick="UpdateType(this.id)">
@@ -29,7 +29,7 @@
                 <label for="dynamic">Dynamic</label>
                 
             </div>
-            <div id="option-b" class="option">
+            <div class="option">
 
                 <!-- Memory Size -->
                 <label for="memory">Memory Size</label>
@@ -49,7 +49,7 @@
 
             </div>
 
-            <div id="option-c" class="option">
+            <div class="option">
 
                 <!-- Processes -->
                 <label for="processes">Processes</label>
@@ -60,7 +60,7 @@
                 
             </div>
 
-            <div id="option-d" class="option">
+            <div class="option">
 
                 <!-- First fit -->
                 <input type="radio" id="firstfit" name="algo" onclick="CheckType(this.id)">
@@ -89,15 +89,31 @@
 
         <div class="division"></div>
 
+        <!-- Output container -->
         <div class="output-container">
 
-            <div id="process-label">Processes</div>
-            <div id="process-container">
-                <!-- <div class="process"><input type="text"></div> -->
+            <!-- Process container -->
+            <div class="process-container">
+                <div class="process-label">
+                    Processes: <span id="num-of-processes">0</span>
+                </div>
+                <div id="process-stack">
+                    <div class="proc">Process-1: <input type="text" id="proc-1"></div>
+                    <div class="proc">Process-2: <input type="text" id="proc-2"></div>
+                    <div class="proc">Process-3: <input type="text" id="proc-3"></div>
+                    <div class="proc">Process-4: <input type="text" id="proc-4"></div>
+                </div>
             </div>
 
-            <div id="ram-size">0</div><div id="ram-unit">MB</div>
-            <div id="ram"> 
+            <!-- Memory container -->
+            <div class="memory-container">
+                <div class="memory-label">
+                    Memory: <span id="memory-size">0</span><span id="memory-unit"> MB</span>
+                </div>
+                
+                <div id="memory"> 
+    
+                </div>
             </div>
         </div>
     </div>
