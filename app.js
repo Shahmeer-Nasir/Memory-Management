@@ -280,10 +280,50 @@ function NextFit() {
     
 }
 
-function BesttFit() {
+function BestFit() {
 
+    partitions = Number(document.getElementById('partitions-opt').value);
+    processes = Number(document.getElementById('processes-opt').value);
 
-    
+    for(i = 0; i < processes; i++) {
+        
+        proc_size = document.getElementById('proc-' + (i + 1)).value;
+        proc_size = Number(proc_size);
+
+        best_part = 0;
+        best_part_size = 100;
+
+        for(j = 0; j < partitions; j++) {
+            // alert('process ' + i + '\npartition ' + j)
+
+            const partition = document.getElementById('mem-part-' + (j + 1));
+            if(partition.readOnly == false) {
+
+                part_size = partition.value;
+                part_size = Number(part_size);
+
+                if(proc_size <= part_size && part_size < best_part_size) {
+                    // alert(' part_size > worst_part_size' +  part_size + ' > ' + worst_part_size);
+
+                    best_part_size = part_size;
+                    best_part = j + 1;
+                }
+            }
+        }
+
+        if(best_part != 0) {
+
+            frag_size = Number(document.getElementById('frag-size').innerHTML);
+            frag_size += best_part_size - proc_size;
+            document.getElementById('frag-size').innerHTML = frag_size;
+
+            const process = document.getElementById('proc-part-' + best_part);
+            process.value = 'P' + (i + 1) + ': ' + proc_size;
+            process.style.padding = (proc_size * spacing) + 'px 0';
+            process.classList.add('proc-alloc');
+            document.getElementById('mem-part-' + best_part).readOnly = 'true';
+        }
+    }
 }
 
 
@@ -301,7 +341,7 @@ function WorstFit() {
         worst_part_size = 0;
 
         for(j = 0; j < partitions; j++) {
-            alert('process ' + i + '\npartition ' + j)
+            // alert('process ' + i + '\npartition ' + j)
 
             const partition = document.getElementById('mem-part-' + (j + 1));
             if(partition.readOnly == false) {
@@ -310,7 +350,7 @@ function WorstFit() {
                 part_size = Number(part_size);
 
                 if(proc_size <= part_size && part_size > worst_part_size) {
-                    alert(' part_size > worst_part_size' +  part_size + ' > ' + worst_part_size);
+                    // alert(' part_size > worst_part_size' +  part_size + ' > ' + worst_part_size);
 
                     worst_part_size = part_size;
                     worst_part = j + 1;
@@ -321,7 +361,7 @@ function WorstFit() {
         if(worst_part != 0) {
 
             frag_size = Number(document.getElementById('frag-size').innerHTML);
-            frag_size += worst_part - proc_size;
+            frag_size += worst_part_size - proc_size;
             document.getElementById('frag-size').innerHTML = frag_size;
 
             const process = document.getElementById('proc-part-' + worst_part);
@@ -330,16 +370,13 @@ function WorstFit() {
             process.classList.add('proc-alloc');
             document.getElementById('mem-part-' + worst_part).readOnly = 'true';
         }
-
     }
-    
 }
 
 
 function CheckAlgo(id, type) {
 
     if(id == 'firstfit'){
-        // alert('Algo: ' + id + '\nType: ' + type);
         FirstFit(type);
     }
     else if(id == 'nextfit'){
@@ -351,7 +388,6 @@ function CheckAlgo(id, type) {
         BestFit();
     }
     else if(id == 'worstfit'){
-        alert('Algo: ' + id + '\nType: ' + type);
         WorstFit();
     }
 }
@@ -385,11 +421,9 @@ function CheckType(id) {
 
     // Checking type (static/dynamic)
     if(static == true) {
-        // alert('static true!');
         CheckMemoryPartitionSize(id);
     }
     else if (static == false) {
-        // alert('dynamic true!');
         CheckAlgo(id, 'dynamic');
     }
 }
