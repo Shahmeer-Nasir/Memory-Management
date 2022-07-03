@@ -24,13 +24,14 @@ function AddPartition(memory_size, part_num){
     mem_part.type = 'text';
     mem_part.id = 'mem-part-' + part_num;
     mem_part.setAttribute("onchange", "UpdatePartSize(" + part_num + ")");
+    mem_part.style.padding = (size * spacing) + 'px 0';
     mem_part.value = size;
 
     const proc_part = document.createElement('input');
     proc_part.className = 'proc-part';
     proc_part.type = 'text';
     proc_part.id = 'proc-part-' + part_num;
-    proc_part.style.padding = (size * spacing) + 'px 0';
+    proc_part.readOnly = true;
     proc_part.value = 0;
 
     part.appendChild(mem_part);
@@ -42,9 +43,9 @@ function AddPartition(memory_size, part_num){
 
 function UpdatePartSize(part_num) {
 
-    const proc_part = document.getElementById('proc-part-' + part_num);
+    const mem_part = document.getElementById('mem-part-' + part_num);
     mem_part_size = document.getElementById('mem-part-' + part_num).value;
-    proc_part.style.padding = (mem_part_size * spacing) + 'px 0';
+    mem_part.style.padding = (mem_part_size * spacing) + 'px 0';
 }
 
 function UpdateProcSize(proc_num) {
@@ -181,7 +182,7 @@ function SwapIn(process_num, process_size) {
     // alert('process added');
 }
 
-function ShowExternalFrag(rem_memory_size) {
+function ShowRemMem(rem_memory_size) {
 
     const memory = document.getElementById('memory');
 
@@ -196,10 +197,10 @@ function ShowExternalFrag(rem_memory_size) {
 
     const proc_part = document.createElement('input');
     proc_part.className = 'proc-part';
-    proc_part.classList.add('ext-frag');
+    proc_part.classList.add('rem-mem');
     proc_part.type = 'text';
     proc_part.style.padding = (rem_memory_size * spacing) + 'px 0';
-    proc_part.value = 'External fragmentation';
+    proc_part.value = 'Remaining Memory';
     proc_part.readOnly = true;
 
     part.appendChild(mem_part);
@@ -227,11 +228,11 @@ function FirstFit(type) {
                 rem_memory_size = rem_memory_size - process_size;
                 alert('rem_memory_size: ' + rem_memory_size);
             }
-            else if (rem_memory_size > 0 && rem_memory_size < process_size) {
-                ShowExternalFrag(rem_memory_size);
-                break;
-            }
+            
 
+        }
+        if (rem_memory_size > 0) {
+            ShowRemMem(rem_memory_size);
         }
 
     }
@@ -254,10 +255,19 @@ function FirstFit(type) {
 
                     part_size = partition.value;
                     part_size = Number(part_size);
+
                     if(proc_size <= part_size) {
-                        document.getElementById('proc-part-' + (j + 1)).value =
-                        'P' + (i + 1) + ': ' + proc_size;
+
+                        frag_size = Number(document.getElementById('frag-size').innerHTML);
+                        frag_size += part_size - proc_size;
+                        document.getElementById('frag-size').innerHTML = frag_size;
+
+                        const process = document.getElementById('proc-part-' + (j + 1));
+                        process.value = 'P' + (i + 1) + ': ' + proc_size;
+                        process.style.padding = (proc_size * spacing) + 'px 0';
+                        process.classList.add('proc-alloc');
                         document.getElementById('mem-part-' + (j + 1)).readOnly = 'true';
+                        
                         break;
                     }
                 }
