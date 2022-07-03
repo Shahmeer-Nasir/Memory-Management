@@ -84,11 +84,12 @@ function UpdateType(id) {
 
     SetValues();
     
-    if(id == 'static') {
+    if(id == 'static-opt') {
         document.getElementById('partitions-opt').disabled = false;
         document.getElementById('memory').innerHTML = '';
     }
-    else if (id == 'dynamic') {
+    else if (id == 'dynamic-opt') {
+        // alert('hello');
         document.getElementById('partitions-opt').disabled = true;
         document.getElementById('memory').innerHTML = '';
     }
@@ -145,32 +146,72 @@ function SwapIn(process_num, process_size) {
 
     const memory = document.getElementById('memory');
 
-    const node = document.createElement('div')
-    const node1 = document.createElement('input');
-    node1.type = 'text';
-    node1.readOnly = true;
-    node1.value = 'P' + process_num + ':' + process_size;
-    node1.id = 'swapped-process-' + process_num;
+    const part = document.createElement('div');
+    part.className = 'part';
+    part.id = 'cont-part-' + process_num;
 
-    node.appendChild(node1);
-    node.className = 'partition';
+    const mem_part = document.createElement('input');
+    mem_part.className = 'mem-part';
+    mem_part.type = 'text';
+    mem_part.id = 'mem-part-' + process_num;
+    mem_part.value = process_size;
+    mem_part.readOnly = true;
 
-    memory.appendChild(node);
-    // alert('process swapped');
+    const proc_part = document.createElement('input');
+    proc_part.className = 'proc-part';
+    proc_part.classList.add('proc-alloc');
+    proc_part.type = 'text';
+    proc_part.id = 'proc-part-' + process_num;
+    proc_part.style.padding = (process_size * spacing) + 'px 0';
+    proc_part.value = 'P' + process_num;
+    proc_part.readOnly = true;
+
+    part.appendChild(mem_part);
+    part.appendChild(proc_part);
+    memory.appendChild(part);
+
+
+    // alert('process added');
+}
+
+function ShowExternalFrag(rem_memory_size) {
+
+    const memory = document.getElementById('memory');
+
+    const part = document.createElement('div');
+    part.className = 'part';
+
+    const mem_part = document.createElement('input');
+    mem_part.className = 'mem-part';
+    mem_part.type = 'text';
+    mem_part.value = rem_memory_size;
+    mem_part.readOnly = true;
+
+    const proc_part = document.createElement('input');
+    proc_part.className = 'proc-part';
+    proc_part.classList.add('ext-frag');
+    proc_part.type = 'text';
+    proc_part.style.padding = (rem_memory_size * spacing) + 'px 0';
+    proc_part.value = 'External fragmentation';
+    proc_part.readOnly = true;
+
+    part.appendChild(mem_part);
+    part.appendChild(proc_part);
+    memory.appendChild(part);
+
 }
 
 function FirstFit(type) {
 
     if(type == 'dynamic') {
 
-        rem_memory_size = document.getElementById('memory-size').innerHTML;
-        rem_memory_size = Number(rem_memory_size);
-        processes = document.getElementById('processes').value;
+        rem_memory_size = document.getElementById('memory-opt').value;
+        processes = document.getElementById('processes-opt').value;
 
         for(i = 0; i < processes; i++) {
             // alert('processes: ' + processes + '\niteration: ' + i);
 
-            process_size = document.getElementById('process-' + (i + 1)).value;
+            process_size = document.getElementById('proc-' + (i + 1)).value;
             process_size = Number(process_size);
             // alert('process-' + (i + 1) + ' size: ' + process_size);
 
@@ -178,6 +219,10 @@ function FirstFit(type) {
                 SwapIn(i + 1, process_size);
                 rem_memory_size = rem_memory_size - process_size;
                 alert('rem_memory_size: ' + rem_memory_size);
+            }
+            else if (rem_memory_size > 0 && rem_memory_size < process_size) {
+                ShowExternalFrag(rem_memory_size);
+                break;
             }
 
         }
@@ -227,7 +272,7 @@ function FirstFit(type) {
 function CheckAlgo(id, type) {
 
     if(id == 'firstfit'){
-        // alert('Algo: ' + id + '\nType: ' + type);
+        alert('Algo: ' + id + '\nType: ' + type);
         FirstFit(type);
     }
     else if(id == 'nextfit'){
@@ -246,13 +291,13 @@ function CheckAlgo(id, type) {
 
 function CheckMemoryPartitionSize(id) {
 
-    partitions = document.getElementById('partitions').value;
+    partitions = document.getElementById('partitions-opt').value;
     memory_size = document.getElementById('memory-size').innerHTML;
     total_partition_size = 0;
 
     // Calculating total partition size
     for(i = 0; i < partitions; i++){
-        size = document.getElementById('partition-' + (i + 1)).value;
+        size = document.getElementById('mem-part-' + (i + 1)).value;
         size = Number(size);
         total_partition_size += size;
     }
@@ -269,7 +314,7 @@ function CheckMemoryPartitionSize(id) {
 
 function CheckType(id) {
 
-    static = document.getElementById('static').checked;
+    static = document.getElementById('static-opt').checked;
 
     // Checking type (static/dynamic)
     if(static == true) {
