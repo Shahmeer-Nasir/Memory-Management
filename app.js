@@ -86,11 +86,18 @@ function UpdateType(id) {
     
     if(id == 'static-opt') {
         document.getElementById('partitions-opt').disabled = false;
+        document.getElementById('nextfit').disabled = false;
+        document.getElementById('bestfit').disabled = false;
+        document.getElementById('worstfit').disabled = false;
         document.getElementById('memory').innerHTML = '';
     }
     else if (id == 'dynamic-opt') {
         // alert('hello');
         document.getElementById('partitions-opt').disabled = true;
+        document.getElementById('nextfit').disabled = true;
+        document.getElementById('bestfit').disabled = true;
+        document.getElementById('worstfit').disabled = true;
+        
         document.getElementById('memory').innerHTML = '';
     }
 }
@@ -229,28 +236,28 @@ function FirstFit(type) {
 
     }
     else if(type == 'static') {
-        // alert('static selected!');
+        alert('static selected!');
 
-        partitions = Number(document.getElementById('partitions').value);
-        processes = Number(document.getElementById('processes').value);
+        partitions = Number(document.getElementById('partitions-opt').value);
+        processes = Number(document.getElementById('processes-opt').value);
 
         for(i = 0; i < processes; i++) {
             
-            proc_size = document.getElementById('process-' + (i + 1)).value;
+            proc_size = document.getElementById('proc-' + (i + 1)).value;
             proc_size = Number(proc_size);
             // alert('hello');
             for(j = 0; j < partitions; j++) {
                 // alert('process ' + i + '\npartition ' + j)
                 
-                const partition = document.getElementById('partition-' + (j + 1));
+                const partition = document.getElementById('mem-part-' + (j + 1));
                 if(partition.readOnly == false) {
 
                     part_size = partition.value;
                     part_size = Number(part_size);
                     if(proc_size <= part_size) {
-                        document.getElementById('partition-' + (j + 1)).value =
-                        'P' + (i + 1) + ':' + proc_size;
-                        document.getElementById('partition-' + (j + 1)).readOnly = 'true';
+                        document.getElementById('proc-part-' + (j + 1)).value =
+                        'P' + (i + 1) + ': ' + proc_size;
+                        document.getElementById('mem-part-' + (j + 1)).readOnly = 'true';
                         break;
                     }
                 }
@@ -258,14 +265,14 @@ function FirstFit(type) {
             }
         }
 
-        while(proc_num <= partitions && part_num <= partitions) {
-            if(proc_size <= part_size) {
-                document.getElementById('partition-' + part_num).value =
-                'p' + proc_num + ':' + proc_size;
-                proc_num++;
-            }
-            part_num++;
-        }
+        // while(proc_num <= partitions && part_num <= partitions) {
+        //     if(proc_size <= part_size) {
+        //         document.getElementById('partition-' + part_num).value =
+        //         'p' + proc_num + ':' + proc_size;
+        //         proc_num++;
+        //     }
+        //     part_num++;
+        // }
     }
 }
 

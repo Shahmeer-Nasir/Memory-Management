@@ -85,6 +85,7 @@ h1 {
 
 .proc {
     box-sizing: border-box;
+    margin-bottom: 1%;
     border: 2px solid black;
     border-radius: 5px;
     background-color: rgba(0, 136, 255, 0.25);
@@ -93,6 +94,7 @@ h1 {
 .part {
     position: relative;
     display: flex;
+    margin-bottom: 1%;
 }
 
 .part::before {
@@ -132,6 +134,7 @@ h1 {
     box-sizing: border-box;
     border: 2px solid black;
     border-radius: 5px;
+    /* height: 100%; */
 }
 
 input.proc-alloc {
