@@ -226,7 +226,7 @@ function FirstFit(type) {
             if(rem_memory_size >= process_size) {
                 SwapIn(i + 1, process_size);
                 rem_memory_size = rem_memory_size - process_size;
-                alert('rem_memory_size: ' + rem_memory_size);
+                // alert('rem_memory_size: ' + rem_memory_size);
             }
             
 
@@ -237,7 +237,6 @@ function FirstFit(type) {
 
     }
     else if(type == 'static') {
-        alert('static selected!');
 
         partitions = Number(document.getElementById('partitions-opt').value);
         processes = Number(document.getElementById('processes-opt').value);
@@ -246,7 +245,6 @@ function FirstFit(type) {
             
             proc_size = document.getElementById('proc-' + (i + 1)).value;
             proc_size = Number(proc_size);
-            // alert('hello');
             for(j = 0; j < partitions; j++) {
                 // alert('process ' + i + '\npartition ' + j)
                 
@@ -267,42 +265,94 @@ function FirstFit(type) {
                         process.style.padding = (proc_size * spacing) + 'px 0';
                         process.classList.add('proc-alloc');
                         document.getElementById('mem-part-' + (j + 1)).readOnly = 'true';
-                        
+
                         break;
                     }
                 }
-                // alert('last line of j');
+            }
+        }
+    }
+}
+
+function NextFit() {
+
+
+    
+}
+
+function BesttFit() {
+
+
+    
+}
+
+
+function WorstFit() {
+
+    partitions = Number(document.getElementById('partitions-opt').value);
+    processes = Number(document.getElementById('processes-opt').value);
+
+    for(i = 0; i < processes; i++) {
+        
+        proc_size = document.getElementById('proc-' + (i + 1)).value;
+        proc_size = Number(proc_size);
+
+        worst_part = 0;
+        worst_part_size = 0;
+
+        for(j = 0; j < partitions; j++) {
+            alert('process ' + i + '\npartition ' + j)
+
+            const partition = document.getElementById('mem-part-' + (j + 1));
+            if(partition.readOnly == false) {
+
+                part_size = partition.value;
+                part_size = Number(part_size);
+
+                if(proc_size <= part_size && part_size > worst_part_size) {
+                    alert(' part_size > worst_part_size' +  part_size + ' > ' + worst_part_size);
+
+                    worst_part_size = part_size;
+                    worst_part = j + 1;
+                }
             }
         }
 
-        // while(proc_num <= partitions && part_num <= partitions) {
-        //     if(proc_size <= part_size) {
-        //         document.getElementById('partition-' + part_num).value =
-        //         'p' + proc_num + ':' + proc_size;
-        //         proc_num++;
-        //     }
-        //     part_num++;
-        // }
+        if(worst_part != 0) {
+
+            frag_size = Number(document.getElementById('frag-size').innerHTML);
+            frag_size += worst_part - proc_size;
+            document.getElementById('frag-size').innerHTML = frag_size;
+
+            const process = document.getElementById('proc-part-' + worst_part);
+            process.value = 'P' + (i + 1) + ': ' + proc_size;
+            process.style.padding = (proc_size * spacing) + 'px 0';
+            process.classList.add('proc-alloc');
+            document.getElementById('mem-part-' + worst_part).readOnly = 'true';
+        }
+
     }
+    
 }
+
 
 function CheckAlgo(id, type) {
 
     if(id == 'firstfit'){
-        alert('Algo: ' + id + '\nType: ' + type);
+        // alert('Algo: ' + id + '\nType: ' + type);
         FirstFit(type);
     }
     else if(id == 'nextfit'){
         alert('Algo: ' + id + '\nType: ' + type);
-        NextFit(type);
+        NextFit();
     }
     else if(id == 'bestfit'){
         alert('Algo: ' + id + '\nType: ' + type);
-        BestFit(type);
+        BestFit();
     }
     else if(id == 'worstfit'){
         alert('Algo: ' + id + '\nType: ' + type);
-        WorstFit(type);
+        WorstFit();
     }
 }
 
