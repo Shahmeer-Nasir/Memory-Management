@@ -276,7 +276,45 @@ function FirstFit(type) {
 
 function NextFit() {
 
+    partitions = Number(document.getElementById('partitions-opt').value);
+    processes = Number(document.getElementById('processes-opt').value);
 
+    next_part = 0;
+
+    for(i = 0; i < processes; i++) {
+        
+        proc_size = document.getElementById('proc-' + (i + 1)).value;
+        proc_size = Number(proc_size);
+
+
+        for(j = next_part; j < partitions; j++) {
+            // alert('process ' + i + '\npartition ' + j)
+            
+            const partition = document.getElementById('mem-part-' + (j + 1));
+            if(partition.readOnly == false) {
+
+                part_size = partition.value;
+                part_size = Number(part_size);
+
+                if(proc_size <= part_size) {
+
+                    frag_size = Number(document.getElementById('frag-size').innerHTML);
+                    frag_size += part_size - proc_size;
+                    document.getElementById('frag-size').innerHTML = frag_size;
+
+                    const process = document.getElementById('proc-part-' + (j + 1));
+                    process.value = 'P' + (i + 1) + ': ' + proc_size;
+                    process.style.padding = (proc_size * spacing) + 'px 0';
+                    process.classList.add('proc-alloc');
+                    document.getElementById('mem-part-' + (j + 1)).readOnly = 'true';
+
+                    next_part = j + 1;
+
+                    break;
+                }
+            }
+        }
+    }
     
 }
 
